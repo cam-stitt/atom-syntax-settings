@@ -4,18 +4,10 @@ Syntax specific settings there in your config.
 
 This is very much a work in progress, expect bugs.
 
-Just add the following to your `config.cson`:
+You can easily add languages according to the grammar scopeName. Below is an example of modifying the python settings:
 
 ```
 'syntax-settings':
-  'languages': [
-  ]
-```
-
-You can then begin adding languages underneath the grammar scopeName. Below is an example of what is available:
-
-```
-{
   'source.python':
     'editorSettings':
       'tabLength': 4
@@ -23,7 +15,6 @@ You can then begin adding languages underneath the grammar scopeName. Below is a
       'showInvisibles': false
       'softWrap': false
       'showIndentGuide': false
-}
 ```
 
 Any of the methods in [Editor](https://atom.io/docs/api/v0.69.0/api/) or [EditorView](https://atom.io/docs/api/v0.69.0/api/) that start with 'set' are valid settings.
