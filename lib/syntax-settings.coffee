@@ -6,10 +6,12 @@ module.exports =
     languages: [
       name: 'python'
       extension: '.py'
-      settings:
+      editorSettings:
         tabLength: 4
+      editorViewSettings:
         showInvisibles: false
         softWrap: false
+        showIndentGuide: false
     ]
 
   activate: (state) ->
@@ -26,10 +28,16 @@ module.exports =
         that._set_syntax_settings(editorView, editor, languageSettings)
 
   _set_syntax_settings: (editorView, editor, languageSettings) ->
-    settings = languageSettings['settings']
+    editorSettings = languageSettings['editorSettings']
     # Editor settings
-    editor.setTabLength(settings['tabLength'])
+    for key, value of editorSettings
+      attributeName = 'set' + key
+      if editor[attributeName]
+        editor[attributeName](value)
 
+    editorViewSettings = languageSettings['editorViewSettings']
     # EditorView Settings
-    editorView.setSoftWrap(settings['softWrap'])
-    editorView.setShowInvisibles(settings['showInvisibles'])
+    for key, value of editorViewSettings
+      attributeName = 'set' + key
+      if editorView[attributeName]
+        editorView[attributeName](value)
