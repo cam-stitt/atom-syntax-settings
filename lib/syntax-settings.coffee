@@ -4,14 +4,13 @@ _ = require 'lodash'
 module.exports =
   defaultSettings:
     languages: [
-      name: 'python'
-      extension: '.py'
-      editorSettings:
-        tabLength: 4
-      editorViewSettings:
-        showInvisibles: false
-        softWrap: false
-        showIndentGuide: false
+      "source.python":
+        editorSettings:
+          tabLength: 4
+        editorViewSettings:
+          showInvisibles: false
+          softWrap: false
+          showIndentGuide: false
     ]
 
   activate: (state) ->
@@ -20,10 +19,12 @@ module.exports =
     defaults = _.defaults atom.config.get('syntax-settings.languages'), @defaultSettings
     atom.workspaceView.eachEditorView (editorView) ->
       editor = editorView.getEditor()
-      extension = path.extname(editor.getTitle())
-      languageSettings = _.find defaults, {'extension': extension}
+      grammar = editor.getGrammar()
+      console.log defaults.languages
+
+      languageSettings = _.find defaults.languages, grammar.scopeName
       if !languageSettings?
-        console.log "Can't find language for " + extension
+        console.log "Can't find language for " + grammar.scopeName
       else
         that._set_syntax_settings(editorView, editor, languageSettings)
 

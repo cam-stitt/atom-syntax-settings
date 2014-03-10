@@ -12,15 +12,18 @@ Just add the following to your `config.cson`:
   ]
 ```
 
-You can then begin adding languages. Below is an example of what is available:
+You can then begin adding languages underneath the grammar scopeName. Below is an example of what is available:
 
 ```
-'name': 'python'
-'extension': '.py'
-'settings':
-  'tabLength': 4
-  'showInvisibles': false
-  'showIndentGuide': false
+{
+  'source.python':
+    'editorSettings':
+      'tabLength': 4
+    'editorViewSettings':
+      'showInvisibles': false
+      'softWrap': false
+      'showIndentGuide': false
+}
 ```
 
 Any of the methods in [Editor](https://atom.io/docs/api/v0.69.0/api/) or [EditorView](https://atom.io/docs/api/v0.69.0/api/) that start with 'set' are valid settings.
