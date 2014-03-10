@@ -1,4 +1,3 @@
-path = require 'path'
 _ = require 'lodash'
 
 module.exports =
@@ -18,7 +17,6 @@ module.exports =
     atom.workspaceView.eachEditorView (editorView) ->
       editor = editorView.getEditor()
       grammar = editor.getGrammar()
-      console.log defaults
 
       languageSettings = _.find defaults, grammar.scopeName
       if !languageSettings?
