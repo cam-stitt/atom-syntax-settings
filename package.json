@@ -1,0 +1,14 @@
+{
+  "name": "syntax-settings",
+  "main": "./lib/syntax-settings",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "repository": "https://github.com/cam-stitt/syntax-settings",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1"
+  }
+}
