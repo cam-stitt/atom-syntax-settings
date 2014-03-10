@@ -1,5 +1,23 @@
 # syntax-settings package
 
-A short description of your package.
+Syntax specific settings there in your config.
 
-![A screenshot of your spankin' package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+This is very much a work in progress, expect bugs.
+
+Just add the following to your `config.cson`:
+
+```
+'syntax-settings':
+  'languages': [
+  ]
+```
+
+You can then begin adding languages. Below is an example of what is available:
+
+```
+'name': 'python'
+'extension': '.py'
+'settings':
+  'tabLength': 4
+  'showInvisibles': false
+```
