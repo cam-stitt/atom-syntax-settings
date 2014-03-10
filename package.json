@@ -1,7 +1,7 @@
 {
   "name": "syntax-settings",
   "main": "./lib/syntax-settings",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A short description of your package",
   "repository": "https://github.com/cam-stitt/atom-syntax-settings",
   "license": "MIT",
