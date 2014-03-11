@@ -2,39 +2,58 @@ _ = require 'lodash'
 
 module.exports =
   configDefaults:
-    "source.python":
-      editorSettings:
-        tabLength: 4
-      editorViewSettings:
-        showInvisibles: false
-        softWrap: false
-        showIndentGuide: false
+    source:
+      python:
+        editorSettings:
+          tabLength: 4
+        editorViewSettings:
+          showInvisibles: false
+          softWrap: false
+          showIndentGuide: false
 
   activate: (state) ->
     console.log "syntax-settings activated"
-    that = this
-    defaults = _.defaults atom.config.get('syntax-settings'), @overrides
-    atom.workspaceView.eachEditorView (editorView) ->
-      editor = editorView.getEditor()
-      grammar = editor.getGrammar()
+    atom.workspaceView.command "syntax-settings:reload", => @loadSettings()
+    @loadSettings()
 
-      languageSettings = _.find defaults, grammar.scopeName
-      if !languageSettings?
-        console.log "Can't find language for " + grammar.scopeName
-      else
-        that._set_syntax_settings(editorView, editor, languageSettings)
+  loadSettings: ->
+    @defaults = atom.config.get('syntax-settings')
+    atom.workspaceView.eachEditorView _.bind(@_loadSettingsForEditorView, @)
 
-  _set_syntax_settings: (editorView, editor, languageSettings) ->
+  _loadSettingsForEditorView: (editorView) ->
+    editor = editorView.getEditor()
+    grammar = editor.getGrammar()
+
+    languageSettings = @_extractGrammarSettings(@defaults, grammar)
+    if !languageSettings?
+      console.log "Can't find language for " + grammar.scopeName
+    else
+      console.log "Loading settings for " + grammar.scopeName
+      @_setSyntaxSettings(editorView, editor, languageSettings)
+
+  _extractGrammarSettings: (settings, grammar) ->
+    path = grammar.scopeName.split('.')
+    value = settings
+    for p in path
+      if !value?
+        break
+      value = value[p]
+    return value
+
+  _setSyntaxSettings: (editorView, editor, languageSettings) ->
     editorSettings = languageSettings['editorSettings']
     # Editor settings
     for key, value of editorSettings
-      attributeName = 'set' + key
+      attributeName = @_formatAttribute(key)
       if editor[attributeName]
         editor[attributeName](value)
 
     editorViewSettings = languageSettings['editorViewSettings']
     # EditorView Settings
     for key, value of editorViewSettings
-      attributeName = 'set' + key
+      attributeName = @_formatAttribute(key)
       if editorView[attributeName]
         editorView[attributeName](value)
+
+  _formatAttribute: (key) ->
+    return 'set' + key.charAt(0).toUpperCase() + key.slice(1);

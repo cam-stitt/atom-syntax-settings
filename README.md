@@ -10,17 +10,18 @@ apm install syntax-settings
 
 ## Usage
 
-You can easily add languages according to the grammar scopeName. Below is an example of modifying the python settings:
+You can easily add languages according to the grammar scopeName. Below is an example of modifying the python (`source.python`) settings:
 
 ```
 'syntax-settings':
-  'source.python':
-    'editorSettings':
-      'tabLength': 4
-    'editorViewSettings':
-      'showInvisibles': false
-      'softWrap': false
-      'showIndentGuide': false
+  'source':
+    'python':
+      'editorSettings':
+        'tabLength': 4
+      'editorViewSettings':
+        'showInvisibles': false
+        'softWrap': false
+        'showIndentGuide': false
 ```
 
 ## Supported Settings
