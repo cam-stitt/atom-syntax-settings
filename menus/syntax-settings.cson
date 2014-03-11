@@ -1,0 +1,16 @@
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      {
+        'label': 'Syntax Settings'
+        'submenu': [
+          {
+            'label': 'Reload'
+            'command': 'syntax-settings:reload'
+          }
+        ]
+      }
+    ]
+  }
+]
