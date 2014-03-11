@@ -1,7 +1,7 @@
 {
   "name": "syntax-settings",
   "main": "./lib/syntax-settings",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Syntax specific settings there in your config.",
   "repository": "https://github.com/cam-stitt/atom-syntax-settings",
   "license": "MIT",
