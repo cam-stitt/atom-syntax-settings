@@ -10,6 +10,10 @@ module.exports =
           showInvisibles: false
           softWrap: false
           showIndentGuide: false
+      go:
+        editorSettings:
+          tabLength: 4
+          softTabs: false
 
   activate: (state) ->
     console.log "syntax-settings activated"
@@ -17,7 +21,7 @@ module.exports =
     @loadSettings()
 
   loadSettings: ->
-    @defaults = atom.config.get('syntax-settings')
+    @defaults = _.merge {}, @defaultOverrides, atom.config.get('syntax-settings')
     atom.workspaceView.eachEditorView _.bind(@_loadSettingsForEditorView, @)
 
   _loadSettingsForEditorView: (editorView) ->
