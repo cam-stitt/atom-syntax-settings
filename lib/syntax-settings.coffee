@@ -15,6 +15,16 @@ module.exports =
           tabLength: 4
           softTabs: false
 
+  settingsAllowed: {
+    'editorSettings': [
+      'softTabs', 'softWrap', 'tabLength'
+    ]
+    'editorViewSettings': [
+      'fontFamily', 'fontSize', 'invisibles', 'placeholderText',
+      'showIndentGuide', 'showInvisibles', 'softWrap'
+    ]
+  }
+
   activate: (state) ->
     console.log "syntax-settings activated"
     atom.workspaceView.command "syntax-settings:reload", => @loadSettings()
@@ -45,19 +55,19 @@ module.exports =
     return value
 
   _setSyntaxSettings: (editorView, editor, languageSettings) ->
-    editorSettings = languageSettings['editorSettings']
-    # Editor settings
-    for key, value of editorSettings
-      attributeName = @_formatAttribute(key)
-      if editor[attributeName]
-        editor[attributeName](value)
+    _setSettings(editor, languageSettings, 'editorSettings')
+    _setSettings(editorView, languageSettings, 'editorViewSettings')
 
-    editorViewSettings = languageSettings['editorViewSettings']
+  _loopAndSetSettings: (object, settings, name) ->
+    objectSettings = settings[name]
     # EditorView Settings
-    for key, value of editorViewSettings
+    for key, value of objectSettings
+      if !_.contains @settingsAllowed[name], key
+        console.log key + " is not valid for " + name
       attributeName = @_formatAttribute(key)
-      if editorView[attributeName]
-        editorView[attributeName](value)
+      if object[attributeName]
+        object[attributeName](value)
+        continue
 
   _formatAttribute: (key) ->
     return 'set' + key.charAt(0).toUpperCase() + key.slice(1);
