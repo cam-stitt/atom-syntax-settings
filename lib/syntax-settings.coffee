@@ -55,8 +55,8 @@ module.exports =
     return value
 
   _setSyntaxSettings: (editorView, editor, languageSettings) ->
-    _setSettings(editor, languageSettings, 'editorSettings')
-    _setSettings(editorView, languageSettings, 'editorViewSettings')
+    _loopAndSetSettings(editor, languageSettings, 'editorSettings')
+    _loopAndSetSettings(editorView, languageSettings, 'editorViewSettings')
 
   _loopAndSetSettings: (object, settings, name) ->
     objectSettings = settings[name]

@@ -10,5 +10,12 @@
   },
   "dependencies": {
     "lodash": "~2.4.1"
-  }
+  },
+  "keywords": [
+    "syntax",
+    "settings",
+    "grammar",
+    "language",
+    "specific"
+  ]
 }
