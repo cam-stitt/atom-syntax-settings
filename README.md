@@ -41,3 +41,8 @@ Below is a list of supported settings:
 - showIndentGuide
 - showInvisibles
 - softWrap
+
+## Todo
+
+* Add tests
+* Reload settings after file save
