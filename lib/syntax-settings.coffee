@@ -25,9 +25,14 @@ module.exports =
     ]
   }
 
+  buffers: []
+
   activate: (state) ->
-    console.log "syntax-settings activated"
-    atom.workspaceView.command "syntax-settings:reload", => @loadSettings()
+    atom.workspaceView.command "syntax-settings:reload", => @reloadSettings()
+    @loadSettings()
+
+  reloadSettings: ->
+    @buffers = []
     @loadSettings()
 
   loadSettings: ->
@@ -38,11 +43,16 @@ module.exports =
     editor = editorView.getEditor()
     grammar = editor.getGrammar()
 
+    if !_.contains @buffers, editor.buffer
+      @buffers.push editor.buffer
+      editor.buffer.on 'saved', _.bind( ->
+        @_loadSettingsForEditorView(editorView)
+      , @)
+      editor.buffer.on 'destroyed', ->
+        editor.buffer.off()
+
     languageSettings = @_extractGrammarSettings(@defaults, grammar)
-    if !languageSettings?
-      console.log "Can't find language for " + grammar.scopeName
-    else
-      console.log "Loading settings for " + grammar.scopeName
+    if languageSettings
       @_setSyntaxSettings(editorView, editor, languageSettings)
 
   _extractGrammarSettings: (settings, grammar) ->
@@ -60,14 +70,13 @@ module.exports =
 
   _loopAndSetSettings: (object, settings, name) ->
     objectSettings = settings[name]
-    # EditorView Settings
+
     for key, value of objectSettings
       if !_.contains @settingsAllowed[name], key
-        console.log key + " is not valid for " + name
+        continue
       attributeName = @_formatAttribute(key)
       if object[attributeName]
         object[attributeName](value)
-        continue
 
   _formatAttribute: (key) ->
     return 'set' + key.charAt(0).toUpperCase() + key.slice(1);
