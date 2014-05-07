@@ -23,6 +23,9 @@ module.exports =
       'fontFamily', 'fontSize', 'invisibles', 'placeholderText',
       'showIndentGuide', 'showInvisibles', 'softWrap'
     ]
+    'gutterViewSettings': [
+      'showLineNumbers'
+    ]
   }
 
   buffers: []
@@ -67,6 +70,7 @@ module.exports =
   _setSyntaxSettings: (editorView, editor, languageSettings) ->
     @_loopAndSetSettings(editor, languageSettings, 'editorSettings')
     @_loopAndSetSettings(editorView, languageSettings, 'editorViewSettings')
+    @_loopAndSetSettings(editorView.gutter, languageSettings, 'gutterViewSettings')
 
   _loopAndSetSettings: (object, settings, name) ->
     objectSettings = settings[name]
