@@ -22,6 +22,8 @@ You can easily add languages according to the grammar scopeName. Below is an exa
         'showInvisibles': false
         'softWrap': false
         'showIndentGuide': false
+      'gutterViewSettings':
+        'showLineNumbers': true
 ```
 
 ## Supported Settings
@@ -41,6 +43,9 @@ Below is a list of supported settings:
 - showIndentGuide
 - showInvisibles
 - softWrap
+
+### gutterViewSettings
+- showLineNumbers
 
 ## Todo
 
