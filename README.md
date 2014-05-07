@@ -44,5 +44,4 @@ Below is a list of supported settings:
 
 ## Todo
 
-* Add tests
-* Reload settings after file save
+* Read through atom source to find more views/settings that are worth implementing
