@@ -26,6 +26,12 @@ You can easily add languages according to the grammar scopeName. Below is an exa
         'showLineNumbers': true
 ```
 
+To find out which grammar you are using, open Developer Settings (`View => Developer => Toggle Developer Tools`) and run:
+
+```
+atom.workspace.getActiveEditor().getGrammar().scopeName
+```
+
 ## Supported Settings
 
 Below is a list of supported settings:
