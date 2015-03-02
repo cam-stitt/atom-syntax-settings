@@ -1,3 +1,5 @@
+# Update
+This functionality is now in core, I'll no longer be supplying support syntax-settings. See [here](https://discuss.atom.io/t/different-tab-size-depending-on-language/1523/28?u=cam_stitt) for details.
 # syntax-settings package
 
 Syntax specific settings there in your config.
